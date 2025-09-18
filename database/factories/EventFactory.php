@@ -18,19 +18,22 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        // Return a plain set of attributes. Do NOT create models here
+        // since factories are used to create models and calling create()
+        // here leads to recursive model creation and memory exhaustion.
         return [
-            Event::factory()->create([
-                'title' => 'Neon Nights Concert', 
-                'description' => 'An amazing electronic music concert featuring top DJs and artists. Experience the best night of music and lights.',
-                'location' => 'Cairo Opera House',
-                'category' => 'Music',
-                'organizer' => 'EventFlow',
-                'event_date' => '2025-10-15',
-                'start_time' => '19:00',
-                'end_time' => '22:00',
-                'is_published' => true,
-                'user_id' => 1
-            ])
+            'title' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph(),
+            'location' => $this->faker->city(),
+            'category' => $this->faker->randomElement(['Music','Art','Food','Tech']),
+            'organizer' => $this->faker->company(),
+            'event_date' => $this->faker->date(),
+            'start_time' => $this->faker->time('H:i'),
+            'end_time' => $this->faker->time('H:i'),
+            'is_published' => $this->faker->boolean(80),
+            // For user_id and main_image, use factories or known ids when seeding
+            'user_id' => \App\Models\User::factory(),
+            'main_image' => $this->faker->imageUrl(),
         ];
     }
 }

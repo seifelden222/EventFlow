@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         // Seed events
         $this->call([
             EventSeeder::class,
+            NotesSeeder::class,
         ]);
     }
 }
