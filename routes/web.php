@@ -34,3 +34,6 @@ require __DIR__.'/auth.php';
 // Event routes
 Route::resource('events', EventController::class);
 
+// Notes routes
+Route::resource('notes', \App\Http\Controllers\NotesController::class);
+
