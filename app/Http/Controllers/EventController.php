@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Services\WeatherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -13,11 +14,22 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    public function index(WeatherService $weatherService)
     {
         try {
-            $events = Event::paginate(10);
-            return view('events.index', compact('events')); // Return the view with events
+            // Handle graceful fallback for missing events table
+                $events = Event::orderBy('event_date', 'desc')->paginate(10);
+        
+            
+            $city = request()->query('city', 'New York');
+            $temb = request()->query('temb', '');
+            $description = request()->query('description', '');
+
+            $weather = $weatherService->currentByCity($city, 300, 'metric', 'ar', $temb, $description);
+
+            return view('events.index', ['events' => $events, 'city' => $city, 'weather' => $weather]);
+            // return view('events.index', compact('events'));
 
         } catch (\Exception $e) {
             Log::error('Events index error: ' . $e->getMessage());

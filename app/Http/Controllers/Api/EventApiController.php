@@ -17,7 +17,10 @@ class EventApiController extends Controller
     public function index()
     {
         try {
-            $events = Event::paginate(10);
+            $events = Event::query()
+            ->filterByDate(request()->only(['start_date', 'end_date']))
+            ->searchQuery(request()->input('q'))
+            ->paginate(10);
             return EventResources::collection($events);
         } catch (\Exception $e) {
             return response()->json([

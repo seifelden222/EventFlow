@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\EventApiController;
+use App\Http\Controllers\Api\WeatherApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,6 @@ Route::post('logout', [AuthApiController::class, 'logout'])->middleware('auth:sa
 //Api Event routes
 Route::apiResource('events', EventApiController::class)->middleware('auth:sanctum');
 
+//Weather routes
+Route::get('weather/current/coords', [WeatherApiController::class, 'currentByCoords']);
+Route::get('weather/current/city', [WeatherApiController::class, 'currentWeatherByCity']);

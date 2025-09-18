@@ -51,12 +51,32 @@
 
             <div class="weather-box">
                 <div class="d-flex align-items-center gap-2 weather-badge mb-3">
-                    <i class="bi bi-cloud-sun"></i> Partly Cloudy
+                    <i class="bi bi-cloud-sun"></i> 
+                    @if(isset($weather['description']) && !isset($weather['error']))
+                        {{ $weather['description'] }}
+                    @else
+                        Partly Cloudy
+                    @endif
                 </div>
                 <div class="d-flex align-items-baseline gap-2">
-                    <div class="display-6 fw-bold">24°C</div>
-                    <div class="text-secondary">Clear in area</div>
+                    <div class="display-6 fw-bold">
+                        @if(isset($weather['temp']) && !isset($weather['error']))
+                            {{ round($weather['temp']) }}°C
+                        @else
+                            25°C
+                        @endif
+                    </div>
+                    <div class="text-secondary">
+                        @if(isset($weather['city']) && !isset($weather['error']))
+                            {{ $weather['city'] }}
+                        @else
+                            {{ $city }}
+                        @endif
+                    </div>
                 </div>
+                @if(isset($weather['error']))
+                    <div class="small text-warning mt-1">{{ $weather['error'] }}</div>
+                @endif
             </div>
         </aside>
 
@@ -100,21 +120,44 @@
             </div>
 
             <!-- Pagination -->
-            <div class="d-flex flex-column align-items-center mt-4">
-                <div class="pager-dots mb-2">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-sm viwe px-3 rounded-3">1</button>
-                    <button class="btn btn-sm viwe px-3 rounded-3">2</button>
-                    <button class="btn btn-sm viwe px-3 rounded-3">3</button>
-                    <button class="btn btn-sm viwe px-3 rounded-3">Next</button>
-                </div>
+            @if($events->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                <nav aria-label="Events pagination">
+                    <ul class="pagination pagination-sm">
+                        {{-- Previous Page Link --}}
+                        @if ($events->onFirstPage())
+                            <li class="page-item disabled"><span class="page-link">السابق</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $events->previousPageUrl() }}">السابق</a></li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($events->getUrlRange(1, $events->lastPage()) as $page => $url)
+                            @if ($page == $events->currentPage())
+                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                            @endif
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($events->hasMorePages())
+                            <li class="page-item"><a class="page-link" href="{{ $events->nextPageUrl() }}">التالي</a></li>
+                        @else
+                            <li class="page-item disabled"><span class="page-link">التالي</span></li>
+                        @endif
+                    </ul>
+                </nav>
             </div>
+            
+            <!-- Info about results -->
+            <div class="text-center mt-2">
+                <small class="text-muted">
+                    عرض {{ $events->firstItem() ?? 0 }} إلى {{ $events->lastItem() ?? 0 }} 
+                    من أصل {{ $events->total() }} حدث
+                </small>
+            </div>
+            @endif
         </section>
     </div>
 </div>

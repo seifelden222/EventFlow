@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // OpenWeather / Weather service configuration
+    'weather' => [
+        // Set WEATHER_API_KEY in your .env file
+        'api_key' => env('WEATHER_API_KEY'),
+    ],
+
+    
 ];
