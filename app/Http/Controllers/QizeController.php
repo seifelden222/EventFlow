@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Qize;
+use App\Models\Qizes;
 use Illuminate\Http\Request;
 
 class QizeController extends Controller
@@ -34,7 +34,7 @@ class QizeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Qize $qize)
+    public function show(Qizes $qizes)
     {
         //
     }
@@ -42,7 +42,7 @@ class QizeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Qize $qize)
+    public function edit(Qizes $qizes)
     {
         //
     }
@@ -50,7 +50,7 @@ class QizeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Qize $qize)
+    public function update(Request $request, Qizes $qizes)
     {
         //
     }
@@ -58,7 +58,7 @@ class QizeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Qize $qize)
+    public function destroy(Qizes $qizes)
     {
         //
     }

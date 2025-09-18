@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('qizes', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            // define event_id column and its foreign key constraint
-            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
-            $table->string('title', 160);
-            $table->boolean('is_active')->default(true)->index();
+            $table->foreignId('quiz_id')->constrained('qizes')->onDelete('cascade');
+            $table->text('text');
+            $table->json('options_json'); // Store options as JSON array
+            $table->smallInteger('correct_index')->default(0); // Index of the correct
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qizes');
+        Schema::dropIfExists('questions');
     }
+
 };

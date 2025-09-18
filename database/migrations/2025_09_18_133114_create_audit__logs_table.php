@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('qizes', function (Blueprint $table) {
+        Schema::create('audit__logs', function (Blueprint $table) {
             $table->id();
-            // define event_id column and its foreign key constraint
-            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
-            $table->string('title', 160);
-            $table->boolean('is_active')->default(true)->index();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('action', 120);
+            $table->string('target_type', 80)->nullable()->index();
+            $table->foreignId('target_id')->nullable()->index();
+            $table->json('meta_json')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qizes');
+        Schema::dropIfExists('audit__logs');
     }
 };
