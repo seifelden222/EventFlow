@@ -37,3 +37,8 @@ Route::resource('events', EventController::class);
 // Notes routes
 Route::resource('notes', \App\Http\Controllers\NotesController::class);
 
+// Quizzes routes
+Route::resource('quizes', \App\Http\Controllers\QuizController::class);
+
+
+

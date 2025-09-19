@@ -20,7 +20,7 @@ class Questions extends Model
     ];
     public function quiz()
     {
-        return $this->belongsTo(Qizes::class);
+        return $this->belongsTo(Quizes::class);
     }
 
     public function submissions()

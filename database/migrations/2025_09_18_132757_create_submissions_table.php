@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quiz_id')->constrained('qizes')->onDelete('cascade');
+            $table->foreignId('quiz_id')->constrained('quizes')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->json('answers_json'); // Store user choices as JSON array
             $table->smallInteger('score')->default(0)->index(); // Computed server-side

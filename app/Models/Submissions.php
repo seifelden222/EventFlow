@@ -21,7 +21,7 @@ class Submissions extends Model
     ];
     public function quiz()
     {
-        return $this->belongsTo(Qizes::class, 'quiz_id');
+        return $this->belongsTo(Quizes::class, 'quiz_id');
     }
     public function user()
     {
