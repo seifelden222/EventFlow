@@ -11,7 +11,7 @@
         </a>
 
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 align-items-center">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         @forelse($quizes as $quiz)
         <div class="col">
             @include('quizes._quiz-card', ['quiz' => $quiz])
