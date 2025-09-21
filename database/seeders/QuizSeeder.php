@@ -2,46 +2,45 @@
 
 namespace Database\Seeders;
 
-use App\Models\Notes;
+use App\Models\Quizes;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NotesSeeder extends Seeder
+class QuizSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Create 10 sample notes for testing. Use factory but optionally download images.
+
         $download = env('SEED_DOWNLOAD_IMAGES', false);
 
         if (!$download) {
-            Notes::factory()->count(10)->create();
+            Quizes::factory()->count(10)->create();
             return;
         }
 
-        $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 10; $i++) {
-            $remoteUrl = 'https://picsum.photos/seed/note' . $i . '/800/600';
+            $remoteUrl = 'https://picsum.photos/seed/quiz' . $i . '/1200/800';
             $img = $remoteUrl;
             try {
                 $contents = @file_get_contents($remoteUrl);
                 if ($contents !== false) {
-                    $dir = storage_path('app/public/notes');
+                    $dir = storage_path('app/public/quizes');
                     if (!is_dir($dir)) {
                         mkdir($dir, 0755, true);
                     }
-                    $filename = 'note_' . $i . '.jpg';
+                    $filename = 'quiz_' . $i . '.jpg';
                     $path = $dir . DIRECTORY_SEPARATOR . $filename;
                     file_put_contents($path, $contents);
-                    $img = 'storage/notes/' . $filename;
+                    $img = 'storage/quizes/' . $filename;
                 }
             } catch (\Throwable $e) {
                 $img = $remoteUrl;
             }
 
-            Notes::factory()->create(['img' => $img]);
+            Quizes::factory()->create(['img' => $img]);
         }
     }
 }

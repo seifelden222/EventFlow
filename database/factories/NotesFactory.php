@@ -20,7 +20,8 @@ class NotesFactory extends Factory
             'user_id' => \App\Models\User::factory(),
             'event_id' => \App\Models\Event::factory(),
             'content' => $this->faker->paragraph(),
-            'img' => $this->faker->imageUrl(), // or use $this->faker->imageUrl() for a placeholder image
+            // Use a stable placeholder image URL (picsum) seeded per-factory instance
+            'img' => 'https://picsum.photos/seed/note' . $this->faker->unique()->numberBetween(1, 100000) . '/800/600',
         ];
     }
 }

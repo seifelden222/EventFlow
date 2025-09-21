@@ -1,257 +1,412 @@
+/* Import Bootstrap Icons (if not already imported globally) */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 :root {
-    --bg: #1d1e20;
-    --panel: #282a2f;
-    --card: #282b2c;
-    --text: #dfe5ea;
-    --muted: #6b6b6b;
-    --brand: #2de1ee;
+    --bg-primary: #121212; /* Very dark background */
+    --bg-secondary: #1e1e1e; /* Card/panel background */
+    --border-color: #333;
+    --text-color: #e0e0e0; /* Light text for contrast */
+    --text-muted: #9e9e9e; /* Muted text */
+    --accent-info: #0dcaf0; /* Bootstrap info color */
+    --accent-primary: #0d6efd; /* Bootstrap primary color */
+    --accent-success: #198754; /* Bootstrap success color */
+    --accent-warning: #ffc107; /* Bootstrap warning color */
+    --accent-danger: #dc3545; /* Bootstrap danger color */
+    --accent-light: #f8f9fa; /* Bootstrap light color */
 }
 
 body {
-    background: var(--bg);
-    color: #fff;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
-        Arial;
+    background: var(--bg-primary);
+    color: var(--text-color);
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto,
+        "Helvetica Neue", Arial, sans-serif; /* Modern font stack */
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-/* ====== Topbar ====== */
+/* General Link/Hover Styles */
+a {
+    color: var(--accent-info);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    /* border-radius: 2px; */
+}
+a:hover {
+    color: var(--accent-primary);
+}
+.hover-link:hover {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.08
+    ); /* Light hover effect for sidebar links */
+    color: var(--text-color) !important;
+}
+
+/* --- Topbar / Navigation --- */
 .topbar {
-    background: var(--panel);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+.navbar-brand {
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    color: var(--accent-info);
+    border-color: var(--accent-info);
+}
+.navbar-brand:hover {
+    background-color: var(--accent-info);
+    color: var(--bg-secondary) !important;
 }
 .navbar .nav-link {
-    color: var(--text);
+    color: var(--text-color);
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.3rem;
+    transition: all 0.2s ease-in-out;
 }
 .navbar .nav-link:hover {
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
 }
-.brand {
-    background: var(--brand);
-    color: #fff;
-    border-radius: 26px;
-    padding: 8px 10px;
-    font-weight: 800;
-    box-shadow: 0 10px 22px 5px rgba(46, 246, 210, 0.25);
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
 }
-.btn-outline-light.rounded-pill {
-    border-color: #42464d;
-    color: #e9eef3;
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
-.btn-outline-light.rounded-pill:hover {
-    background: #e9eef3;
-    color: #000;
-    border-color: #e9eef3;
+.dropdown-menu-dark {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+.dropdown-item {
+    color: var(--text-color);
+}
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ====== Search Bar + Create ====== */
-.search-wrap {
-    max-width: 920px;
-    margin-inline: auto;
-}
+/* --- Search Bar --- */
 .search-box {
-    background: #292a2d;
-    border: 0;
-    color: #fff;
-    border-radius: 999px;
-    height: 46px;
-    padding-inline-start: 44px;
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 0.75rem; /* Slightly less rounded than full pill */
+    height: 48px;
+    padding-left: 3rem; /* Adjusted for icon */
 }
 .search-box::placeholder {
-    color: #7c8793;
+    color: var(--text-muted);
 }
 .search-icon {
-    position: absolute;
-    inset-inline-start: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.8;
-}
-.btn-create {
-    background: var(--brand);
-    border: 0;
-    color: #001;
-    font-weight: 800;
-    border-radius: 999px;
-    padding: 0.6rem 1.2rem;
-    box-shadow: 0 8px 22px rgba(46, 246, 210, 0.25);
+    color: var(--text-muted);
+    font-size: 1.25rem;
 }
 
-/* ====== Tag Pills ====== */
-.btns {
-    gap: 10px;
-}
+/* --- Tags / Filter Buttons --- */
 .btn-tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.38rem 1.05rem;
-    border-radius: 999px;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(4px);
-}
-.btn-orange {
-    border: 2px solid #ff9e44;
-    color: #ff9e44;
-    box-shadow: 0 0 10px rgba(255, 158, 68, 0.25) inset,
-        0 0 8px rgba(255, 158, 68, 0.25);
-}
-.btn-purple {
-    border: 2px solid #a071ff;
-    color: #a071ff;
-    box-shadow: 0 0 10px rgba(160, 113, 255, 0.25) inset,
-        0 0 8px rgba(160, 113, 255, 0.25);
-}
-.btn-yellow {
-    border: 2px solid #f5c542;
-    color: #f5c542;
-    box-shadow: 0 0 10px rgba(245, 197, 66, 0.25) inset,
-        0 0 8px rgba(245, 197, 66, 0.25);
-}
-.btn-cyan {
-    border: 2px solid #4fc3f7;
-    color: #4fc3f7;
-    box-shadow: 0 0 10px rgba(79, 195, 247, 0.25) inset,
-        0 0 8px rgba(79, 195, 247, 0.25);
-}
-.btn-teal {
-    border: 2px solid #22e0c4;
-    color: #22e0c4;
-    box-shadow: 0 0 10px rgba(34, 224, 196, 0.25) inset,
-        0 0 8px rgba(34, 224, 196, 0.25);
-}
-.btn-lime {
-    border: 2px solid #9be15d;
-    color: #9be15d;
-    box-shadow: 0 0 10px rgba(155, 225, 93, 0.25) inset,
-        0 0 8px rgba(155, 225, 93, 0.25);
-}
-.btn-blue {
-    border: 2px solid #6fb0ff;
-    color: #6fb0ff;
-    box-shadow: 0 0 10px rgba(111, 176, 255, 0.25) inset,
-        0 0 8px rgba(111, 176, 255, 0.25);
+    border-radius: 1.5rem; /* Pill shape */
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid; /* Solid border for clarity */
+    color: var(--text-color); /* Default text color */
 }
 
-/* ====== Sidebar ====== */
-.side-card {
-    background: var(--card);
-    border: 1px solid #303234;
-    border-radius: 14px;
+/* Specific tag colors (using Bootstrap variants) */
+.btn-outline-primary {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
 }
-.side-card .title {
-    font-weight: 800;
-    font-size: 15px;
-}
-.side-list a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #cfd6dc;
-    text-decoration: none;
-    padding: 0.55rem 0.8rem;
-    border-radius: 10px;
-}
-.side-list a:hover {
-    background: #2d3033;
+.btn-outline-primary:hover {
+    background-color: var(--accent-primary);
     color: #fff;
 }
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+.btn-outline-success {
+    border-color: var(--accent-success);
+    color: var(--accent-success);
+}
+.btn-outline-success:hover {
+    background-color: var(--accent-success);
+    color: #fff;
+}
+.btn-outline-warning {
+    border-color: var(--accent-warning);
+    color: var(--accent-warning);
+}
+.btn-outline-warning:hover {
+    background-color: var(--accent-warning);
+    color: #000;
+}
+.btn-outline-info {
+    border-color: var(--accent-info);
+    color: var(--accent-info);
+}
+.btn-outline-info:hover {
+    background-color: var(--accent-info);
+    color: #000;
+}
+.btn-outline-danger {
+    border-color: var(--accent-danger);
+    color: var(--accent-danger);
+}
+.btn-outline-danger:hover {
+    background-color: var(--accent-danger);
+    color: #fff;
+}
+.btn-outline-light {
+    border-color: var(--text-color);
+    color: var(--text-color);
+} /* Use text-color for light */
+.btn-outline-light:hover {
+    background-color: var(--text-color);
+    color: var(--bg-primary);
+}
+
+/* --- Sidebar --- */
+.side-card,
 .weather-box {
-    background: linear-gradient(180deg, #2b2f33, #232528);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+.side-card .title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+.side-list a {
+    color: var(--text-muted);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.5rem;
+}
+.side-list a:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+}
+.weather-box {
+    background: linear-gradient(135deg, #2b2f33, #232528);
     border: 1px solid #323438;
-    border-radius: 16px;
-    padding: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 .weather-badge {
-    display: inline-flex;
-    gap: 8px;
-    align-items: center;
     background: #1f2023;
     border: 1px solid #34363a;
-    border-radius: 12px;
-    padding: 6px 10px;
-    color: #cdd3d9;
+    border-radius: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
 
-/* ====== Cards ====== */
-.card-dark {
-    background: var(--card);
-    border: 0;
+/* --- Event Cards --- */
+.event-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.muted {
-    color: var(--muted);
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
 }
-.img-wrap {
-    height: 190px;
-    overflow: hidden;
-    border-radius: 1rem;
+.event-card .img-wrap {
+    height: 180px;
+    background-color: #333; /* Placeholder background */
 }
-.img-wrap img {
+.event-card .img-wrap img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
 }
-.card-dark {
-    display: flex;
-    flex-direction: column;
+.event-card .card-title {
+    color: var(--text-color);
 }
-.card-dark .img-wrap {
-    height: 180px;
+.event-card .text-muted {
+    color: var(--text-muted) !important;
 }
-.card-dark .card-body {
-    flex: 1 1 auto;
-}
-/* Prevent horizontal scroll */
-html, body {
-    overflow-x: hidden;
+.event-card .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .glow-cyan {
-    box-shadow: 0 0 18px rgba(34, 224, 196, 0.45);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
 }
-.glow-pink {
-    box-shadow: 0 0 18px rgba(176, 108, 255, 0.45);
+.glow-purple {
+    box-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
 }
 .glow-orange {
-    box-shadow: 0 0 18px rgba(255, 178, 91, 0.45);
-}
-.btn-view {
-    background: transparent;
-    border: 0;
-    padding: 0.25rem 0.55rem;
-    border-radius: 0.75rem;
-    color: var(--muted);
-}
-.btn-view:hover {
-    color: #111;
-    background: #22e0c4;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
 }
 
-/* ====== Pagination / Dots ====== */
-.pager-dots {
+.icon-btn {
+    width: 36px;
+    height: 36px;
     display: flex;
-    gap: 8px;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+    border-color: var(--border-color);
 }
-.pager-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: #3b3d41;
-    opacity: 0.65;
+.icon-btn:hover {
+    color: var(--accent-info);
+    border-color: var(--accent-info);
+    background-color: transparent;
 }
-.pager-dots .dot.active {
-    width: 22px;
-    border-radius: 999px;
-    background: #22e0c4;
-    opacity: 1;
+.btn-primary {
+    /* For "Take Quiz" button */
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+.btn-primary:hover {
+    background-color: darken(var(--accent-primary), 10%);
+    border-color: darken(var(--accent-primary), 10%);
 }
 
-.viwe {
-    color: #6b6b6b;
-    background-color: #282b2c;
+/* --- Pagination --- */
+.pagination {
+    /* Main container styling for the whole pagination block */
+    display: flex; /* Ensures items are in a row */
+    justify-content: center; /* Centers the pagination block */
+    padding: 0.5rem; /* Padding around the buttons */
+    background-color: var(--bg-secondary); /* Darker background for the block */
+    border: 1px solid var(--accent-info); /* A subtle border in accent color */
+    border-radius: 1.5rem; /* Nicely rounded corners for the whole block */
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3); /* Soft glow in accent color */
+    gap: 0.25rem; /* Small gap between buttons */
 }
-.viwe:hover {
-    transition: all 0.3s ease-in-out;
-    background-color: #22e0c4;
+
+.pagination .page-item {
+    margin: 0; /* Remove default margins between items */
+}
+
+.pagination .page-item .page-link {
+    background-color: #2a2a2a; /* Slightly lighter dark background for normal pages */
+    border: none; /* No individual button border, the container has one */
+    color: var(--accent-primary); /* Accent blue for normal page numbers */
+    min-width: 40px; /* Fixed width for better visual alignment */
+    height: 40px; /* Fixed height */
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem; /* Rounded corners for individual buttons */
+    font-weight: 600; /* Bolder text */
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none; /* Ensure no underline */
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.15
+    ); /* Lighter background on hover */
+    color: var(--accent-info); /* Glow effect color on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow on hover */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(
+        --accent-info
+    ); /* Active background color (e.g., info/cyan) */
+    border-color: var(--accent-info); /* Border matches background */
+    color: var(--bg-primary); /* Dark text on the active button */
+    font-weight: 700; /* Even bolder */
+    box-shadow: 0 0 12px rgba(0, 188, 212, 0.6); /* Stronger glow for active */
+    transform: scale(1.05); /* Slightly larger active button */
+    z-index: 1; /* Ensure active button is on top if overlap */
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #1a1a1a; /* Darker for disabled */
+    color: #555; /* Muted color for disabled text */
+    pointer-events: none; /* Disable click events */
+    opacity: 0.6; /* Slightly transparent */
+    box-shadow: none; /* No glow/shadow for disabled */
+    transform: none; /* No transform for disabled */
+}
+
+/* Specific styling for 'Previous' and 'Next' buttons if they use icons */
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    border-radius: 0.5rem; /* Ensure rounded corners */
+}
+
+/* Ensure the `nav` element contains the pagination class if not already */
+nav[aria-label="Events pagination"] .pagination {
+    margin-bottom: 0; /* Adjust as needed */
+}
+
+/* You might need to adjust .container .d-flex .justify-content-center for the pagination block: */
+.container.mt-5 .d-flex.justify-content-center {
+    /* Add any specific centering adjustments here if the .pagination class styling isn't enough */
+    width: 100%;
+}
+
+/* --- Quick Notes Section --- */
+.quick-note-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quick-note-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+.quick-img-wrap {
+    height: 120px; /* Consistent image height */
+    background-color: #333;
+}
+.quick-note-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.quick-note-content {
+    color: var(--text-white-75);
+    font-size: 0.9rem;
+}
+.quick-note-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.btn-view-small {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.icon-btn-sm {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.quick-empty-state {
+    padding: 2rem 1rem;
+}
+.quick-empty-state i {
+    color: var(--text-muted);
+}
+.quick-empty-state p {
+    color: var(--text-muted);
+}
+
+/* Utilities */
+.text-white-75 {
+    color: rgba(255, 255, 255, 0.75) !important;
 }

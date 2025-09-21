@@ -19,7 +19,7 @@ class EventController extends Controller
     {
         try {
             // Handle graceful fallback for missing events table
-                $events = Event::orderBy('event_date', 'desc')->paginate(10)->withQueryString();
+                $events = Event::orderBy('event_date', 'desc')->paginate(10);
         
             
             $city = request()->query('city', 'New York');

@@ -27,5 +27,13 @@ class Event extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * One-to-one relation: an event may have one quiz
+     */
+    public function quize()
+    {
+        return $this->hasOne(\App\Models\Quizes::class, 'event_id');
+    }
     
 }

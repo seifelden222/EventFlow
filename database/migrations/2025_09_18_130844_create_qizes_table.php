@@ -11,8 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('qizes', function (Blueprint $table) {
+        Schema::create('quizes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true)->index();
+            $table->date('date')->nullable();
+            $table->time('time_start')->nullable();
+            $table->time('time_end')->nullable();
+            $table->string('img')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -22,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qizes');
+        Schema::dropIfExists('quizes');
     }
+
 };
+
