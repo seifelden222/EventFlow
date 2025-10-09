@@ -34,7 +34,7 @@
                     @if($note->img)
                     <div class="p-3 pb-0">
                         <div class="img-wrap border border-2 border-info glow-cyan">
-                            <img src="{{ asset('storage/'.$note->img) }}" alt="Note Image" class="note-image" />
+                            <img src="{{ \Illuminate\Support\Str::startsWith($note->img, ['http://','https://']) ? $note->img : asset('storage/'.$note->img) }}" alt="Note Image" class="note-image" />
                         </div>
                     </div>
                     @endif

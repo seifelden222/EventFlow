@@ -22,7 +22,7 @@
 					@if($event->qize)
 					<a href="{{ route('quizes.show', $event->qize->id) }}" class="btn-view">Open Quiz</a>
 					@else
-					<a href="{{ route('quizes.create') }}?event_id={{ $event->id }}" class="btn-view">Create Quiz</a>
+					<a href="{{ route('quizes.create') }}?event_id={{ $event->id }}" class="btn btn-success">Create Quiz</a>
 					@endif
 					<a href="{{ route('events.index') }}" class="btn btn-outline-secondary">Back to Events</a>
 				</div>

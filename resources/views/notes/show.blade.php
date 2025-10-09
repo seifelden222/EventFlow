@@ -40,7 +40,7 @@
             <div class="card card-dark shadow rounded-4 note-detail-card">
                 @if($note->img)
                 <div class="note-image-header">
-                    <img src="{{ asset('storage/'.$note->img) }}" alt="Note Image" class="note-full-image" />
+                    <img src="{{ \Illuminate\Support\Str::startsWith($note->img, ['http://','https://']) ? $note->img : asset('storage/'.$note->img) }}" alt="Note Image" class="note-full-image" />
                 </div>
                 @endif
                 

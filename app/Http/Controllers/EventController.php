@@ -32,8 +32,12 @@ class EventController extends Controller
             // return view('events.index', compact('events'));
 
         } catch (\Exception $e) {
+            // Log the error (keeps existing behavior) but re-throw so the
+            // debug page (Whoops) can display the full exception and stacktrace
+            // during local development. Remove or revert this change for
+            // production environments.
             Log::error('Events index error: ' . $e->getMessage());
-            abort(500);
+            throw $e;
         }
     }
 

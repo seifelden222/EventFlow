@@ -48,7 +48,7 @@
                                 <i class="bi bi-image"></i> Current Image
                             </label>
                             <div class="current-image-wrap">
-                                <img src="{{ asset('storage/'.$note->img) }}" alt="Current Note Image" class="current-image" />
+                                <img src="{{ \Illuminate\Support\Str::startsWith($note->img, ['http://','https://']) ? $note->img : asset('storage/'.$note->img) }}" alt="Current Note Image" class="current-image" />
                                 <div class="form-check mt-2">
                                     <input class="form-check-input" type="checkbox" id="remove_image" name="remove_image">
                                     <label class="form-check-label text-light" for="remove_image">
