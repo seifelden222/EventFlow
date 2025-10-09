@@ -27,6 +27,7 @@
             <div class="d-flex gap-2">
                 <a href="{{ route('quizes.show', $quiz->id) }}" class="btn btn-sm btn-outline-info">Show</a>
                 <a href="{{ route('quizes.edit', $quiz->id) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+                <a href="{{ route('quizes.take', $quiz) }}" class="btn btn-sm btn-primary">Take</a>
                 
             </div>
             <div>

@@ -40,5 +40,10 @@ Route::resource('notes', \App\Http\Controllers\NotesController::class);
 // Quizzes routes
 Route::resource('quizes', \App\Http\Controllers\QuizController::class);
 
+// Quiz taking and submissions
+Route::get('quizes/{quize}/take', [\App\Http\Controllers\SubmissionController::class, 'take'])->name('quizes.take');
+Route::post('quizes/{quize}/submit', [\App\Http\Controllers\SubmissionController::class, 'store'])->name('quizes.submit');
+Route::get('submissions/{submission}', [\App\Http\Controllers\SubmissionController::class, 'show'])->name('submissions.show');
+
 
 
