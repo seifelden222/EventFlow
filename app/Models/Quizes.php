@@ -27,6 +27,8 @@ class Quizes extends Model
 
     public function questions()
     {
-        return $this->hasMany(Questions::class);
+        // The questions table uses the foreign key 'quiz_id' (singular),
+        // so specify it explicitly to avoid Eloquent inferring 'quizes_id'.
+        return $this->hasMany(Questions::class, 'quiz_id');
     }
 }
